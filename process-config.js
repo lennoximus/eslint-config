@@ -1,20 +1,11 @@
-const baseConfig = {
-  root: true,
-  env: {
-    node: true,
-    browser: true,
-    "shared-node-browser": true,
-    worker: true,
-    serviceworker: true,
-    commonjs: true,
-    es6: true,
-  },
-  extends: [
-    "./configs/base",
-    "./configs/import",
-    "./configs/unicorn",
-    "./configs/nuxt2",
-  ].map((path) => require.resolve(path)),
-};
+const { ESLint } = require("eslint");
+const path = require("path");
+const config = require("./index.js");
+const eslint = new ESLint({
+  baseConfig: config,
+});
 
-module.exports = baseConfig;
+eslint.calculateConfigForFile("./dummy.js").then((some) => {
+  const { rules } = some;
+  debugger;
+});
